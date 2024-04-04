@@ -10,10 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@auth/core": "^0.17.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "nuxt": "^3.11.1",
     "sweetalert2": "^11.10.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/supabase": "^1.2.0",
+    "@sidebase/nuxt-auth": "^0.7.0"
   }
 }
