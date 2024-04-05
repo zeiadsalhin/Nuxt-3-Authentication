@@ -2,7 +2,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 const router = useRouter()
-const client = createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_KEY)
+const client = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
 
 const email = ref()
 const errMsg = ref()

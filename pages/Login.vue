@@ -1,7 +1,7 @@
 <script setup>
 // import sweelalert and other Nuxt API components
 import { createClient } from '@supabase/supabase-js'
-const client = createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_KEY)
+const client = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
 
 import Swal from 'sweetalert2'
 
