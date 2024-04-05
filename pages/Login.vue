@@ -56,11 +56,12 @@ async function signInWithEmail() { // sign in with email and password
 <template>
     <div>
         <!--Login Form Body-->
-        <div class="p-1 md:p-10 flex-col justify-center h-full ">
-            <h1 class="text-3xl md:text-5xl text-center font-bold p-2 reveal">Log in</h1>
+        <div
+            class="p-1 md:p-5 md:my-20 m-10 flex-col justify-center mx-auto w-11/12 h-1/3 bg-gray-200 shadow-2xl rounded-md">
+            <h1 class="text-3xl md:text-5xl text-center font-bold p-5 reveal">Log in</h1>
 
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-600 dark:bg-gray-900"></div>
-            <form id="form" class="space-y-5 p-5 h-screen text-center mx-auto justify-center flex-col reveal"
+            <form id="form" class="space-y-5 p-5 w-full h-fit text-center mx-auto justify-center flex-col reveal"
                 @submit.prevent="signInWithEmail">
                 <!--input fields-->
                 <div class="form mt-3">
@@ -80,7 +81,7 @@ async function signInWithEmail() { // sign in with email and password
 
                 <!--Submit button-->
                 <button @click="" type="submit"
-                    class="px-5 m-5 py-2 w-32 rounded-md hover:cursor-pointer bg-gray-400 hover:bg-gray-500">
+                    class="px-5 m-5 py-2 w-32 rounded-md hover:cursor-pointer bg-gray-400 hover:bg-gray-500 hover:text-gray-50">
                     Log in
                 </button>
                 <!--Forget Password-->

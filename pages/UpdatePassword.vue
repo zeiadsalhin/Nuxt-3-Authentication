@@ -80,11 +80,11 @@ function checkpassword() {
 <template>
     <div>
         <!--form body-->
-        <div class="about p-1 md:p-10 flex-col justify-center h-full">
+        <div class="about p-10 my-10 flex-col justify-center w-full">
             <h1 class="text-2xl md:text-5xl  text-center font-bold p-2">Reset Password</h1>
 
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-900"></div>
-            <form id="form" class="space-y-5 p-5 h-screen text-center mx-auto justify-center flex-col"
+            <form id="form" class="space-y-5 p-5 h-fit text-center mx-auto justify-center flex-col"
                 @submit.prevent="resetpassword">
                 <div class="form mt-3">
                     <label class="p-3 text-md md:text-xl block ">Enter your new password:</label>

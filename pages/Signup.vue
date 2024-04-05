@@ -131,7 +131,7 @@ function checkpassword() { // password Regex min 6 characters, max 30 and must i
 <template>
     <div>
         <!--Form Body-->
-        <div class="p-1 md:p-10 flex-col justify-center h-full ">
+        <div class="p-1 md:p-10 my-5 flex-col justify-center mx-auto h-fit w-11/12 bg-gray-200 rounded-md shadow-inner">
             <h1 class="text-3xl md:text-5xl text-center font-bold p-2">Sign Up</h1>
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-600 dark:bg-gray-900"></div>
             <form id="form" class="p-5 text-center mx-auto justify-center flex-col" @submit.prevent="signUpNewUser">
@@ -174,7 +174,7 @@ function checkpassword() { // password Regex min 6 characters, max 30 and must i
                 </span>
                 <!--Submit button-->
                 <button id="submitbtn" @click="" type="submit"
-                    class="px-5 py-2 w-32 rounded-md hover:cursor-pointer bg-gray-400 hover:bg-gray-500">
+                    class="px-5 py-2 w-32 rounded-md hover:cursor-pointer bg-gray-400 hover:bg-gray-500 hover:text-gray-50">
                     Sign Up
                 </button>
                 <!--separator-->
