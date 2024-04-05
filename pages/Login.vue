@@ -1,34 +1,55 @@
 <script setup>
 // import sweelalert and other Nuxt API components
+import { createClient } from '@supabase/supabase-js'
+const client = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
+
 import Swal from 'sweetalert2'
 
 const router = useRouter()
 const errMsg = ref()
 const email = ref('')
 const password = ref('')
-const isLoggedIn = ref(false)
-
-//Check if logged in already
-onMounted(() => {
-    if (isLoggedIn.value == true) {
-        router.push('/')
-    } else {
-        isLoggedIn.value == false
+onMounted(async () => {
+    try {
+        const { data, error } = await client.auth.getSession();
+        // console.log(data.session.user);
+        if (!data.session) {
+            // console.log('client');
+        } else {
+            router.push("/")
+        }
+    } catch (error) {
+        console.log(error);
     }
-})
+    // console.log(import.meta.env.VITE_SUPABASE_URL)
+});
 
 //Login form 
-function login() {
-    Swal.fire({
-        title: 'Success',
-        icon: 'success',
-        text: 'You Logged in successfully',
-        toast: true,
-        timer: 1000,
-        showConfirmButton: false,
-    }).then(() => {
-        router.push("/")
-    })
+async function signInWithEmail() {
+    try {
+        const { data, error } = await client.auth.signInWithPassword({
+            email: email.value,
+            password: password.value,
+        })
+        if (error) throw error;
+        // successMsg.value = 'Success'
+        console.log('Loggedin Successfully')
+        // console.log(user.id)
+        Swal.fire({
+            title: 'Success',
+            icon: 'success',
+            text: 'You Logged in successfully',
+            toast: true,
+            timer: 1000,
+            showConfirmButton: false,
+        }).then(() => {
+            router.push("/")
+        })
+    } catch (error) {
+        // errorMessages.value = error.message
+        console.log(error)
+        errMsg.value = error
+    }
 }
 </script>
 <template>
@@ -38,7 +59,7 @@ function login() {
 
         <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-600 dark:bg-gray-900"></div>
         <form id="form" class="space-y-5 p-5 h-screen text-center mx-auto justify-center flex-col reveal"
-            @submit.prevent="login">
+            @submit.prevent="signInWithEmail">
             <div class="form mt-3">
                 <label class="p-3 text-md md:text-xl md:mr-14 hiddenm">Email</label>
                 <input placeholder="Email" v-model="email"
@@ -60,7 +81,7 @@ function login() {
                 Log in
             </button>
             <!--Forget Password-->
-            <NuxtLink to="/reset"><button
+            <NuxtLink to="/ResetPassword"><button
                     class="px-5 m-5 py-2 w-fit rounded-md hover:cursor-pointer bg-gray-100 hover:bg-gray-300">
                     Forget password?
                 </button></NuxtLink>

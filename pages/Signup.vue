@@ -1,28 +1,81 @@
 <script setup>
 // import required APIs from Nuxt
+import { createClient } from '@supabase/supabase-js'
+// import { client } from '../plugins/Supabase.js'
+// const supabaseUrl = import.meta.env.VITE_APP_URL;
+// const supabaseKey = import.meta.env.VITE_APP_ANON_KEY;
+
+const client = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
 const router = useRouter()
+const errMsg = ref()
 const displayname = ref('')
 const email = ref('')
 const password = ref('')
 
-// Form Submit function
-function handleSubmit() {
-    let userMessage = {
-        name: displayname.value,
-        email: email.value,
-        // message: this.message
+onMounted(async () => {
+    try {
+        const { data, error } = await client.auth.getSession();
+        // console.log(data.session.user);
+        if (!data.session) {
+            // console.log('client');
+        } else {
+            router.push("/")
+        }
+    } catch (error) {
+        console.log(error);
     }
-    Swal.fire({
-        title: 'Success',
-        icon: 'success',
-        text: 'You Signed Up successfully',
-        toast: true,
-        timer: 2000,
-        showConfirmButton: false,
-    }).then(() => {
-        router.push("Login")
-    })
+
+});
+
+async function signUpNewUser() {
+    try {
+        const { data, error } = await client.auth.signUp({
+            email: email.value,
+            password: password.value,
+            options: {
+                data: {
+                    first_name: displayname.value,
+                    // last_name: 'mohamed',
+                },
+            }
+        })
+        if (error) throw error;
+        // successMsg.value = 'Success'
+        console.log('Signed up successfully')
+        Swal.fire({
+            title: 'Success',
+            icon: 'success',
+            text: 'You Signed Up successfully',
+            toast: true,
+            timer: 2000,
+            showConfirmButton: false,
+        }).then(() => {
+            router.push("Login")
+        })
+    } catch (error) {
+        errMsg.value = error
+        console.log(error)
+    }
 }
+
+// Form Submit function
+// function handleSubmit() {
+//     let userMessage = {
+//         name: displayname.value,
+//         email: email.value,
+//         // message: this.message
+//     }
+//     Swal.fire({
+//         title: 'Success',
+//         icon: 'success',
+//         text: 'You Signed Up successfully',
+//         toast: true,
+//         timer: 2000,
+//         showConfirmButton: false,
+//     }).then(() => {
+//         router.push("Login")
+//     })
+// }
 
 // Form Validation Functions
 function checkname() {
@@ -100,7 +153,9 @@ function checkpassword() {
         <h1 class="text-3xl md:text-5xl text-center font-bold p-2">Sign Up</h1>
 
         <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-600 dark:bg-gray-900"></div>
-        <form id="form" class="p-5 text-center mx-auto justify-center flex-col" @submit.prevent="handleSubmit">
+        <form id="form" class="p-5 text-center mx-auto justify-center flex-col" @submit.prevent="signUpNewUser">
+            <!--Display error message if any-->
+            <p class="text-red-500" v-if="errMsg">{{ errMsg }}</p>
             <div class="form flex justify-center">
                 <label class="p-2 text-md md:text-xl text-right md:mr-14">Name</label>
                 <input @change="changed" id="name" type="name" v-model="displayname" @input="checkname"
@@ -155,20 +210,12 @@ function checkpassword() {
                 login</NuxtLink>
         </form>
         <!--End of body-->
+        <!-- <button @click="signUpNewUser">Sign up</button> -->
     </div>
 </template>
 <script>
 //Import Sweetalert toast
 import Swal from 'sweetalert2'
+import { errorMessages } from 'vue/compiler-sfc';
 
-export default {
-    data() {
-        return {
-
-        }
-    },
-    methods: {
-
-    },
-}
 </script>
