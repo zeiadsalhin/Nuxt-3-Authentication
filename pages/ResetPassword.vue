@@ -10,7 +10,7 @@ const succMsg = ref()
 async function resetpassword() {
     try {
         const { data, error } = await client.auth.resetPasswordForEmail(email.value, {
-            redirectTo: 'https://google.com',
+            redirectTo: 'https://nuxtauthtask.netlify.app/updatepassword',
         })
         console.log("link sent")
         succMsg.value = 'Link sent Successfully, please check your email'
