@@ -10,6 +10,7 @@ const errMsg = ref()
 const displayname = ref('')
 const email = ref('')
 const password = ref('')
+const dataview = ref()
 
 definePageMeta({
     middleware: ["auth"]// handled by Auth middleware
@@ -18,7 +19,7 @@ onMounted(async () => {
     try {
         const { data, error } = await client.auth.getSession(); // get session info
         if (!data.session) {
-            // console.log('client already exist');
+            dataview.value = true // render form when no authentication
         } else {
             router.push("/")
         }
@@ -131,7 +132,8 @@ function checkpassword() { // password Regex min 6 characters, max 30 and must i
 <template>
     <div>
         <!--Form Body-->
-        <div class="p-1 md:p-10 my-5 flex-col justify-center mx-auto h-fit w-11/12 bg-gray-200 rounded-md shadow-inner">
+        <div v-if="dataview"
+            class="p-1 md:p-10 my-5 flex-col justify-center mx-auto h-fit w-11/12 bg-gray-200 rounded-md shadow-inner">
             <h1 class="text-3xl md:text-5xl text-center font-bold p-2">Sign Up</h1>
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-600 dark:bg-gray-900"></div>
             <form id="form" class="p-5 text-center mx-auto justify-center flex-col" @submit.prevent="signUpNewUser">

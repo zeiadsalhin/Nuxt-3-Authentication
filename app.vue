@@ -19,7 +19,7 @@ import Swal from 'sweetalert2'// template
 
 .page-enter-from,
 .page-leave-to {
-  opacity: 0.5;
+  opacity: 0.6;
   /* filter: blur(1rem); */
 }
 </style>

@@ -9,6 +9,7 @@ const router = useRouter()
 const errMsg = ref()
 const email = ref('')
 const password = ref('')
+const dataview = ref()
 definePageMeta({
     middleware: ["auth"] // handles auth routing
 })
@@ -17,6 +18,7 @@ onMounted(async () => {
         const { data, error } = await client.auth.getSession(); // get cookies user info
         if (!data.session) {
             // console.log('client exist');
+            dataview.value = true // render form when no authentication
         } else {
             router.push("/")
         }
@@ -56,7 +58,7 @@ async function signInWithEmail() { // sign in with email and password
 <template>
     <div>
         <!--Login Form Body-->
-        <div
+        <div v-if="dataview"
             class="p-1 md:p-5 md:my-20 m-10 flex-col justify-center mx-auto w-11/12 h-1/3 bg-gray-200 shadow-2xl rounded-md">
             <h1 class="text-3xl md:text-5xl text-center font-bold p-5 reveal">Log in</h1>
 

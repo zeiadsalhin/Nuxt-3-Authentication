@@ -9,6 +9,7 @@ const pass1 = ref()
 const pass2 = ref()
 const errMsg = ref()
 const succMsg = ref()
+const dataview = ref()
 
 definePageMeta({
     middleware: ["notauth"]// will not be loaded when there is no Authentication
@@ -17,9 +18,9 @@ onMounted(async () => {
     try {
         const { data, error } = await client.auth.getSession(); // get session info
         if (data.session) {
-            // console.log('client');
+            dataview.value = true // render form when Token received
         } else {
-            router.push("/")
+            router.push("/login")
         }
     } catch (error) {
         console.log(error);
@@ -80,7 +81,7 @@ function checkpassword() {
 <template>
     <div>
         <!--form body-->
-        <div class="about p-10 my-10 flex-col justify-center w-full">
+        <div v-if="dataview" class="about p-10 my-10 flex-col justify-center w-full">
             <h1 class="text-2xl md:text-5xl  text-center font-bold p-2">Reset Password</h1>
 
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-900"></div>

@@ -1,7 +1,7 @@
 // import Authentication client 
 import { createClient } from '@supabase/supabase-js'
 
-export default defineNuxtRouteMiddleware(async (to, from, next) => { // middleware config
+export default defineNuxtRouteMiddleware(async (to, from,) => { // middleware config
   const client = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
   const isLoginRoute = to.path === '/login' ||to.path === '/signup';
   try {
