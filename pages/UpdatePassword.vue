@@ -93,7 +93,7 @@ function checkpassword() {
                 <div class="form mt-3">
                     <label class="p-3 text-md md:text-xl block ">Enter your new password:</label>
                     <input placeholder="Enter your new password" id="pass1" v-model="pass1"
-                        class="bg-gray-200 placeholder:text-sm  text-black  p-2 md:p-1.5 ml- rounded-md focus:outline-none border-2 w-2/3 md:w-1/5 "
+                        class="bg-gray-200 placeholder:text-sm  text-black  p-2 md:p-1.5 rounded-md focus:outline-none border-2 w-2/3 md:w-1/5 "
                         type="password" @input="checkpassword" required />
                 </div>
                 <!--Error Message-->
@@ -101,7 +101,7 @@ function checkpassword() {
                 <div class="form">
                     <label class="p-3 text-md md:text-xl block ">confirm your password:</label>
                     <input placeholder="Confirm your password" id="pass2" v-model="pass2"
-                        class="bg-gray-200 placeholder:text-sm  text-black  p-2 md:p-1.5 ml- rounded-md focus:outline-none border-2 w-2/3 md:w-1/5 "
+                        class="bg-gray-200 placeholder:text-sm  text-black  p-2 md:p-1.5 rounded-md focus:outline-none border-2 w-2/3 md:w-1/5 "
                         type="password" @input="checkpassword" required />
                 </div>
                 <!--Display error message if any-->
