@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js'
 const client = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
 const router = useRouter()
 const name = ref()
+const dataview = ref()
 // const isloggedin = ref(true)
 // State
 
@@ -21,7 +22,9 @@ const name = ref()
 //         }
 //     }, 0)
 // })
-
+definePageMeta({
+    middleware: ["auth"]
+})
 
 
 onMounted(async () => {
@@ -31,6 +34,7 @@ onMounted(async () => {
 
         if (data.session) {
             name.value = data.session.user.identities[0].identity_data.first_name
+            dataview.value = data.session.user
         } else {
             router.push("/login")
         }
@@ -63,25 +67,22 @@ async function logout() {
 }
 </script>
 <template>
-    <!--Home page details-->
-    <div class="bg-gray-200 p-5 space-y-5">
-        <h1 class="text-3xl font-bold">Nady Elkodaa</h1>
-        <p>Welcome, {{ name }}</p>
-        <p>You have Logged in Successfully</p>
-        <!--Log out button-->
-        <button @click="logout" class="p-2 bg-gray-300 text-xl font-semibold">Log Out</button>
+    <div>
+        <!--Home page details-->
+        <div class="bg-gray-200 p-5 space-y-5">
+            <h1 class="text-3xl font-bold">Nady Elkodaa</h1>
+            <p class="font-semibold">Welcome, {{ name }}</p>
+            <p>You have Logged in Successfully</p>
+            <!--Log out button-->
+            <div class="buttons flex space-x-5">
+                <button @click="logout" class="p-2 bg-gray-300 text-xl font-semibold">Log Out</button>
+                <nuxt-link to="/updatepassword"><button class="p-2.5 bg-slate-300 text-md font-semibold">Reset
+                        Password</button></nuxt-link>
+            </div>
+        </div>
+        <div class="data p-2 bg-slate-100">
+            <h2 class="font-semibold"> Response body:</h2>
+            <p class="p-3"> {{ dataview }}</p>
+        </div>
     </div>
 </template>
-<script>
-
-export default {
-    data() {
-        return {
-            // loggedin: true, // Log in state
-        }
-    },
-    methods: {
-
-    },
-}
-</script>
