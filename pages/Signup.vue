@@ -190,7 +190,6 @@ function checkpassword() {
                 login</NuxtLink>
         </form>
         <!--End of body-->
-        <!-- <button @click="signUpNewUser">Sign up</button> -->
     </div>
 </template>
 <script>
