@@ -2,7 +2,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 const router = useRouter()
-const client = createClient('https://cuzkjvrvoqdgwghyxekm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1emtqdnJ2b3FkZ3dnaHl4ZWttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIyNjUwMDYsImV4cCI6MjAyNzg0MTAwNn0.sBdcKXdD0BlppsEDZN-RWqw2ejTYN1NXx9zqtaSEgcc')
+const client = createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_KEY)
 
 const email = ref()
 const errMsg = ref()
