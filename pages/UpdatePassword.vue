@@ -1,21 +1,21 @@
 <script setup>
+//import Auth client
 import { createClient } from '@supabase/supabase-js'
 
 const router = useRouter()
 const client = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
-
+// refs for inputs
 const pass1 = ref()
 const pass2 = ref()
 const errMsg = ref()
 const succMsg = ref()
 
 definePageMeta({
-    middleware: ["notauth"]
+    middleware: ["notauth"]// will not be loaded when there is no Authentication
 })
 onMounted(async () => {
     try {
-        const { data, error } = await client.auth.getSession();
-        // console.log(data.session.user);
+        const { data, error } = await client.auth.getSession(); // get session info
         if (data.session) {
             // console.log('client');
         } else {
@@ -27,13 +27,13 @@ onMounted(async () => {
 
 });
 
-async function resetpassword() {
+async function resetpassword() {// password reset for user
     try {
         if (pass1.value == pass2.value) {
-            const { data, error } = await client.auth.updateUser({
+            const { data, error } = await client.auth.updateUser({// update user info
                 password: pass1.value
             })
-
+            // display success message and redirect to login page
             console.log("updated")
             errMsg.value = ''
             succMsg.value = 'Password updated successfully'
@@ -44,12 +44,12 @@ async function resetpassword() {
 
 
         } else {
-            errMsg.value = 'Password not match'
+            errMsg.value = 'Password not match'// display error if passwords not match
         }
 
     } catch (error) {
         console.log(error)
-        errMsg.value = error
+        errMsg.value = error // display error message from API
     }
 }
 
@@ -59,7 +59,7 @@ function checkpassword() {
     const b = document.querySelector("#submitbtn")
     const e = document.querySelector("#errorp")
 
-    if (input.value.length < 6) {
+    if (input.value.length < 6) {// min 6 and max 30
         input.classList.add("border-red-500")
         e.classList.remove("hidden")
     } else {
@@ -67,11 +67,11 @@ function checkpassword() {
             input.classList.remove("border-red-500")
             input.classList.add("border-green-500")
             e.classList.add("hidden")
-            b.removeAttribute("disabled", "true")
+            b.removeAttribute("disabled", "true")// prevent submit
         } else {
             input.classList.add("border-red-500")
             e.classList.remove("hidden")
-            b.setAttribute("disabled", "true")
+            b.setAttribute("disabled", "true")// allow submit
         }
 
     }
@@ -79,6 +79,7 @@ function checkpassword() {
 </script>
 <template>
     <div>
+        <!--form body-->
         <div class="about p-1 md:p-10 flex-col justify-center h-full">
             <h1 class="text-2xl md:text-5xl  text-center font-bold p-2">Reset Password</h1>
 

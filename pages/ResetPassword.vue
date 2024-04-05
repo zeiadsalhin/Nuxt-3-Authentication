@@ -1,4 +1,5 @@
 <script setup>
+//import Authentication client
 import { createClient } from '@supabase/supabase-js'
 
 const router = useRouter()
@@ -8,17 +9,17 @@ const email = ref()
 const errMsg = ref()
 const succMsg = ref()
 definePageMeta({
-    middleware: ["auth"]
+    middleware: ["auth"]// handled ny auth middleware
 })
-async function resetpassword() {
+async function resetpassword() { // reset password by email link included token
     try {
         const { data, error } = await client.auth.resetPasswordForEmail(email.value, {
             redirectTo: 'https://nuxtauthtask.netlify.app/updatepassword',
         })
         console.log("link sent")
-        succMsg.value = 'Link sent Successfully, please check your email'
+        succMsg.value = 'Link sent Successfully, please check your email' // display user message for success
     } catch (error) {
-        console.log(error)
+        console.log(error) // print error message for user
         errMsg.value = error
     }
 }
@@ -26,6 +27,7 @@ async function resetpassword() {
 </script>
 <template>
     <div>
+        <!--form body-->
         <div class="about p-1 md:p-10 flex-col justify-center h-full">
             <h1 class="text-2xl md:text-5xl  text-center font-bold p-2">Reset Password</h1>
 

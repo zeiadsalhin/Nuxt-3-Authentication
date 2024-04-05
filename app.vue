@@ -1,4 +1,5 @@
 <template>
+  <!--define Nuxt pages and loader-->
   <div>
     <NuxtLoadingIndicator />
     <NuxtLayout>
@@ -7,9 +8,10 @@
   </div>
 </template>
 <script setup>
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2'// template
 </script>
 <style>
+/*page transitions*/
 .page-enter-active,
 .page-leave-active {
   transition: all 0.2s;

@@ -10,35 +10,32 @@ const errMsg = ref()
 const email = ref('')
 const password = ref('')
 definePageMeta({
-    middleware: ["auth"]
+    middleware: ["auth"] // handles auth routing
 })
 onMounted(async () => {
     try {
-        const { data, error } = await client.auth.getSession();
-        // console.log(data.session.user);
+        const { data, error } = await client.auth.getSession(); // get cookies user info
         if (!data.session) {
-            // console.log('client');
+            // console.log('client exist');
         } else {
             router.push("/")
         }
     } catch (error) {
         console.log(error);
     }
-    // console.log(import.meta.env.VITE_SUPABASE_URL)
-    // console.log(import.meta.env.VITE_SUPABASE_KEY)
 });
 
 //Login form 
-async function signInWithEmail() {
+async function signInWithEmail() { // sign in with email and password
     try {
         const { data, error } = await client.auth.signInWithPassword({
             email: email.value,
             password: password.value,
         })
         if (error) throw error;
-        // successMsg.value = 'Success'
+
+        // display success toast
         console.log('Loggedin Successfully')
-        // console.log(user.id)
         Swal.fire({
             title: 'Success',
             icon: 'success',
@@ -47,10 +44,10 @@ async function signInWithEmail() {
             timer: 1000,
             showConfirmButton: false,
         }).then(() => {
-            router.push("/")
+            router.push("/") //routing to dashboard after login
         })
     } catch (error) {
-        // errorMessages.value = error.message
+        //display error message
         console.log(error)
         errMsg.value = error
     }
@@ -65,6 +62,7 @@ async function signInWithEmail() {
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-600 dark:bg-gray-900"></div>
             <form id="form" class="space-y-5 p-5 h-screen text-center mx-auto justify-center flex-col reveal"
                 @submit.prevent="signInWithEmail">
+                <!--input fields-->
                 <div class="form mt-3">
                     <label class="p-3 text-md md:text-xl md:mr-14 hiddenm">Email</label>
                     <input placeholder="Email" v-model="email"
