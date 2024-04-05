@@ -146,7 +146,7 @@ function checkpassword() { // password Regex min 6 characters, max 30 and must i
                     <label class="p-2 text-md md:text-xl text-right md:mr-14">Name</label>
                     <input @change="changed" id="name" type="name" v-model="displayname" @input="checkname"
                         spellcheck="false"
-                        class="bg-gray-200 dark:bg-gray-300 text-black h-fit my-auto p-1 md:p-2 rounded-md focus:outline-none border-2  w-2/3 md:w-1/5 "
+                        class="bg-gray-300 text-black h-fit my-auto p-1 md:p-2 rounded-md focus:outline-none border-2  w-2/3 md:w-1/5 "
                         required />
                 </div>
                 <!--Error Message-->
@@ -155,7 +155,7 @@ function checkpassword() { // password Regex min 6 characters, max 30 and must i
                 <div class="form mt-3 flex justify-center">
                     <label class="p-3 text-md md:text-xl md:mr-14">Email</label>
                     <input id="email" v-model="email" @input="checkemail" spellcheck="false"
-                        class="bg-gray-200 dark:bg-gray-300 text-black h-fit my-auto p-1 md:p-2 rounded-md focus:outline-none border-2  w-2/3 md:w-1/5 "
+                        class="bg-gray-300 text-black h-fit my-auto p-1 md:p-2 rounded-md focus:outline-none border-2  w-2/3 md:w-1/5 "
                         type="email" required />
 
                 </div>
@@ -165,7 +165,7 @@ function checkpassword() { // password Regex min 6 characters, max 30 and must i
                 <div class="form mt-3 flex justify-center">
                     <label class="p-3 text-md md:text-xl text-center md:mr-5">Password</label>
                     <input id="password" v-model="password" @input="checkpassword"
-                        class="bg-gray-200 dark:bg-gray-300 text-black h-fit my-auto p-1 md:p-2 rounded-md focus:outline-none border-2  w-2/3 md:w-1/5 "
+                        class="bg-gray-300 text-black h-fit my-auto p-1 md:p-2 rounded-md focus:outline-none border-2  w-2/3 md:w-1/5 "
                         type="password" required />
 
                 </div>
