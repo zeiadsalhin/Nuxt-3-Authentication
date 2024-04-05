@@ -6,4 +6,4 @@
 
 // export default client
 
-// API Authentication secret and API (not required at this file)
+// Backend API Authentication secret and API

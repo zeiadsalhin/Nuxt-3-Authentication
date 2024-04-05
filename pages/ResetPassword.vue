@@ -11,6 +11,7 @@ const succMsg = ref()
 definePageMeta({
     middleware: ["auth"]// handled ny auth middleware
 })
+
 async function resetpassword() { // reset password by email link included token
     try {
         const { data, error } = await client.auth.resetPasswordForEmail(email.value, {
@@ -28,6 +29,7 @@ async function resetpassword() { // reset password by email link included token
 <template>
     <div>
         <!--form body-->
+        <!--renders on all states-->
         <div
             class="about p-1 md:p-10 m-10 flex-col justify-center mx-auto w-11/12 h-fit bg-gray-100 shadow-inner rounded-md">
             <h1 class="text-2xl md:text-5xl  text-center font-bold p-4">Reset Password</h1>

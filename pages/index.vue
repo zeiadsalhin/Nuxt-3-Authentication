@@ -50,7 +50,7 @@ async function logout() {
 </script>
 <template>
     <div>
-        <div v-if="dataview">
+        <div v-if="dataview"> <!--will only render when Authenticated-->
             <!--Home page details-->
             <div class="bg-gray-200 p-5 space-y-5">
                 <h1 class="text-3xl font-bold">Nady Elkodaa</h1>

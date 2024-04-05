@@ -15,6 +15,8 @@ const dataview = ref()
 definePageMeta({
     middleware: ["auth"]// handled by Auth middleware
 })
+
+// get user info from cookies if exist on mounted
 onMounted(async () => {
     try {
         const { data, error } = await client.auth.getSession(); // get session info
@@ -132,6 +134,7 @@ function checkpassword() { // password Regex min 6 characters, max 30 and must i
 <template>
     <div>
         <!--Form Body-->
+        <!--will only render when not Authenticated-->
         <div v-if="dataview"
             class="p-1 md:p-10 my-5 flex-col justify-center mx-auto h-fit w-11/12 bg-gray-200 rounded-md shadow-inner">
             <h1 class="text-3xl md:text-5xl text-center font-bold p-2">Sign Up</h1>

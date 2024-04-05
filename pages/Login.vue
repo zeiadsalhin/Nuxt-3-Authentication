@@ -13,6 +13,7 @@ const dataview = ref()
 definePageMeta({
     middleware: ["auth"] // handles auth routing
 })
+// get user data if exist when mounted
 onMounted(async () => {
     try {
         const { data, error } = await client.auth.getSession(); // get cookies user info
@@ -58,12 +59,13 @@ async function signInWithEmail() { // sign in with email and password
 <template>
     <div>
         <!--Login Form Body-->
+        <!--will only render when Authenticated-->
         <div v-if="dataview"
             class="p-1 md:p-5 md:my-20 m-10 flex-col justify-center mx-auto w-11/12 h-1/3 bg-gray-200 shadow-2xl rounded-md">
-            <h1 class="text-3xl md:text-5xl text-center font-bold p-5 reveal">Log in</h1>
+            <h1 class="text-3xl md:text-5xl text-center font-bold p-5">Log in</h1>
 
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-600 dark:bg-gray-900"></div>
-            <form id="form" class="space-y-5 p-5 w-full h-fit text-center mx-auto justify-center flex-col reveal"
+            <form id="form" class="space-y-5 p-5 w-full h-fit text-center mx-auto justify-center flex-col"
                 @submit.prevent="signInWithEmail">
                 <!--input fields-->
                 <div class="form mt-3">

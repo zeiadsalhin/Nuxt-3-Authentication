@@ -14,6 +14,8 @@ const dataview = ref()
 definePageMeta({
     middleware: ["notauth"]// will not be loaded when there is no Authentication
 })
+
+// get user info from cookies to render form if exist
 onMounted(async () => {
     try {
         const { data, error } = await client.auth.getSession(); // get session info
@@ -81,7 +83,8 @@ function checkpassword() {
 <template>
     <div>
         <!--form body-->
-        <div v-if="dataview" class="about p-10 my-10 flex-col justify-center w-full">
+        <!--will only render when Authenticated or Token provided-->
+        <div v-if="dataview" class="p-10 my-10 flex-col justify-center w-full">
             <h1 class="text-2xl md:text-5xl  text-center font-bold p-2">Reset Password</h1>
 
             <div class="w-1/4 h-1 mt-5 rounded-xl mx-auto bg-gray-900"></div>
